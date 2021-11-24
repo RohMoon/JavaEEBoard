@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/styles.css" rel="stylesheet"/>
+    <link href="css/comm.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성날짜</th>
+            <th>댓글수</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody id="res_dataBody">
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    window.onload =function () {
+        let boardListData = [];
+
+        fetch('/board/boardselectall.sap')
+            .then(function (res) {
+
+                return res.json();
+
+            }).then(function (res) {
+
+            boardListData.push(res);
+            console.log(boardListData);
+            for (let i = 0; i <boardListData.length ; i++) {
+
+                let res_dataBody_tr = document.createElement('tr');
+                res_dataBody_tr.setAttribute('id','res_dataBody'+i);
+                res_dataBody_tr.classList.add('res_dataBody_tr');
+
+                document.getElementById('res_dataBody').append(res_dataBody_tr);
+
+                for (let j = 0; j < boardListData[i].length ; j++) {
+
+                    let res_dataBody_td = document.createElement('td');
+                    res_dataBody_td.setAttribute('id','res_dataBody_td'+j);
+                    res_dataBody_td.classList.add('res_dataBody_td');
+                    boardListData[i][j].
+
+                    document.getElementById('res_dataBody'+i).append(res_dataBody_td);
+                    let a = {"a":1};
+                }
+
+            }
+
+        return res;
+
+        }).catch(function () {
+            console.log("error : ",onmessageerror);
+
+
+        });//end of fetch
+    }//end of document Onload
+
+</script>
+</html>

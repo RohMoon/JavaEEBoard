@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.javaeeboard.BoardMapper">
+    <insert id="boardInsert" parameterType="com.example.javaeeboard.BoardDTO" statementType="PREPARED">
+        INSERT INTO
+            BOARD_TB (BOARD_NO, BOARD_TITLE, BOARD_CONTENT, BOARD_AUTHOR)
+        VALUES
+            ('B'||BOARD_TB_SEQ.nextval,
+             #{board_title, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+             #{board_content, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String},
+             #{board_author, mode=IN, jdbcType=VARCHAR, javaType=java.lang.String});
+    </insert>
+    <select id="boardSelectAll" parameterType="com.example.javaeeboard.BoardDTO" resultType="com.example.javaeeboard.BoardDTO" statementType="PREPARED">
+        SELECT
+            ROWNUM ,
+            BOARD_NO,
+            BOARD_TITLE,
+            BOARD_CONTENT,
+            BOARD_REGDATA,
+            BOARD_AUTHOR,
+            BOARD_HIT
+        FROM
+            BOARD_TB
+    </select>
+</mapper>
