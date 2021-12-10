@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 
-public class BoardController  extends MultiActionController {
+public class BoardController extends MultiActionController {
     private BoardService boardService = null;
     private Logger logger = Logger.getLogger(BoardController.class);
     public void setBoardService(BoardService boardService) {

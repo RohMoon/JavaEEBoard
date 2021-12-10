@@ -2,14 +2,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--컨트롤러 클래스 등록 -->
     <!-- 보드 컨트롤러 -->
     <bean id="board-controller" class="com.example.javaeeboard.BoardController">
         <property name="methodNameResolver" ref="board-resolver"/>
         <property name="boardService" ref="board-service"/>
     </bean>
+<!-- 공통 컨트롤러 -->
 
-    <!-- 컨트롤러 맵핑 -->
-<!--    <bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+    <!-- 로그인 컨트롤러 -->
+    <bean id="login-controller" class="com.example.javaeeboard.controller.common.LoginController">
+        <property name="methodNameResolver" ref="login-resolver"/>
+<!--        <property name="boardService" ref="board-service"/>-->
+    </bean>
+
+
+<!-- 컨트롤러 맵핑 메소드 등록 -->
+    <!--보드 컨트롤러 -->
     <bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
@@ -18,14 +27,38 @@
         </property>
     </bean>
 
-
-    <bean id="board-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+    <bean id="url-mapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-                <prop key="/board/boardselectall.sap">BoardSelectAllList</prop>
+                <prop key="/login/login.do">login-controller</prop>
             </props>
         </property>
     </bean>
+
+<!-- Resolver -->
+    <!--Board Resolver-->
+    <bean id="board-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <property name="mappings">
+            <props>
+                <prop key="/board/boardselectall.sap">LoginController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Login Resolver -->
+    <bean id="login-resolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+        <property name="mappings">
+            <props>
+                <prop key="/login/login.do">LoginController</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+
+
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
